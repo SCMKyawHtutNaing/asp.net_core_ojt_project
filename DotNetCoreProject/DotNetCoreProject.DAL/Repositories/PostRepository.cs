@@ -20,7 +20,7 @@ namespace DotNetCoreProject.DAL.Repositories
 
         public List<PostViewModel> GetAll()
         {
-            var query = (from data in _context.Posts
+/*            var query = (from data in _context.Posts
                          where data.IsDeleted==false
                          select new PostViewModel
                          {
@@ -29,9 +29,9 @@ namespace DotNetCoreProject.DAL.Repositories
                              Description = data.Description,
                              PostedUser = data.CreatedUserId.ToString(),
                              PostedDate = data.CreatedDate
-                         });
+                         });*/
 
-/*            var query = from p in _context.Posts
+            var query = from p in _context.Posts
                              from u in _context.AspNetUsers
                              where p.CreatedUserId == u.Id & p.IsDeleted==false
                              select new PostViewModel
@@ -41,7 +41,7 @@ namespace DotNetCoreProject.DAL.Repositories
                                  Description = p.Description,
                                  PostedUser = u.UserName,
                                  PostedDate = p.CreatedDate
-                             };*/
+                             };
 
             return query.ToList();
         }

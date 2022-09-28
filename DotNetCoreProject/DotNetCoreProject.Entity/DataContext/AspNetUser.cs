@@ -15,7 +15,7 @@ namespace DotNetCoreProject.Entity.DataContext
             AspNetUserTokens = new HashSet<AspNetUserToken>();
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int AccessFailedCount { get; set; }
         public string ConcurrencyStamp { get; set; }
         public string Email { get; set; }
