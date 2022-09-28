@@ -1,0 +1,17 @@
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.Utilities.deps.json
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.Utilities.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.Utilities.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.DTO.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.Entity.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.DTO.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\bin\Debug\net6.0\DotNetCoreProject.Entity.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.csproj.AssemblyReference.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.AssemblyInfoInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.AssemblyInfo.cs
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.csproj.CopyComplete
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\refint\DotNetCoreProject.Utilities.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\DotNetCoreProject.Utilities.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Utilities\obj\Debug\net6.0\ref\DotNetCoreProject.Utilities.dll

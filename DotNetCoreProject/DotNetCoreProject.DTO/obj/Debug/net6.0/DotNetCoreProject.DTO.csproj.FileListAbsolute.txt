@@ -1,0 +1,12 @@
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\bin\Debug\net6.0\DotNetCoreProject.DTO.deps.json
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\bin\Debug\net6.0\DotNetCoreProject.DTO.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\bin\Debug\net6.0\DotNetCoreProject.DTO.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.csproj.AssemblyReference.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.AssemblyInfoInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.AssemblyInfo.cs
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.csproj.CoreCompileInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\refint\DotNetCoreProject.DTO.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\DotNetCoreProject.DTO.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.DTO\obj\Debug\net6.0\ref\DotNetCoreProject.DTO.dll

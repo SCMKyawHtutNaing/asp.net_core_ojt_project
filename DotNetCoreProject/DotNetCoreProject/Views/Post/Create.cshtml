@@ -1,0 +1,67 @@
+﻿@model DotNetCoreProject.DTO.EmployeeViewModel
+@{
+}
+
+<h1>Create Employee</h1>
+
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" />
+                <div class="invalid-feedback">
+                    <span asp-validation-for="Name"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Designation">Designation</label>
+                <input asp-for="Designation" class="form-control" />
+                <div class="invalid-feedback">
+                    <span asp-validation-for="Designation"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="Address">Address</label>
+                <textarea asp-for="Address" class="form-control">
+
+                </textarea>
+                <div class="invalid-feedback">
+                    <span asp-validation-for="Address"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Salary">Salary</label>
+                <input asp-for="Salary" class="form-control" />
+                <div class="invalid-feedback">
+                    <span asp-validation-for="Salary"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="JoiningDate">Joining Date</label>
+                <input type="date" asp-for="JoiningDate" class="form-control" />
+                <div class="invalid-feedback">
+                    <span asp-validation-for="JoiningDate"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

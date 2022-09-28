@@ -1,0 +1,14 @@
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\bin\Debug\net6.0\DotNetCoreProject.Entity.deps.json
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\bin\Debug\net6.0\DotNetCoreProject.Entity.runtimeconfig.json
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\bin\Debug\net6.0\DotNetCoreProject.Entity.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\bin\Debug\net6.0\DotNetCoreProject.Entity.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.csproj.AssemblyReference.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.AssemblyInfoInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.AssemblyInfo.cs
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.csproj.CoreCompileInputs.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\refint\DotNetCoreProject.Entity.dll
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.pdb
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\DotNetCoreProject.Entity.genruntimeconfig.cache
+C:\Users\KyawHtutNaing\Documents\SCM .NET Projects\asp.net_core_ojt_project\DotNetCoreProject\DotNetCoreProject.Entity\obj\Debug\net6.0\ref\DotNetCoreProject.Entity.dll

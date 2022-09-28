@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetCoreProject.DAL\DotNetCoreProject.DAL.csproj" />
+    <ProjectReference Include="..\DotNetCoreProject.DTO\DotNetCoreProject.DTO.csproj" />
+    <ProjectReference Include="..\DotNetCoreProject.Entity\DotNetCoreProject.Entity.csproj" />
+    <ProjectReference Include="..\DotNetCoreProject.Utilities\DotNetCoreProject.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

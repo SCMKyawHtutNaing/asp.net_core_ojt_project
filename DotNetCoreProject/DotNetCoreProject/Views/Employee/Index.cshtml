@@ -1,0 +1,71 @@
+﻿@model DotNetCoreProject.DTO.EmployeeViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Employee List</h1>
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6 text-right">
+        <a asp-action="Create" class="btn btn-primary">
+            Create
+        </a>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Designation
+        </th>
+        <th>
+            Salary
+        </th>
+        <th>
+            Joining Date
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    @foreach(var item in Model.employees)
+    {
+<tr>
+    <td>
+        @item.Name
+    </td>
+    <td>
+        @item.Address
+    </td>
+    <td>
+        @item.Designation
+    </td>
+    <td>
+        @item.Salary
+    </td>
+    <td>
+        @item.JoiningDate.ToString("yyyy-MM-dd")
+    </td>
+    <td>
+        <a asp-action="Details" class="btn btn-sm btn-secondary" asp-route-id="@item.EmployeeId">
+            Detail
+        </a>
+        <a asp-action="Edit" class="btn btn-sm btn-info" asp-route-id="@item.EmployeeId">
+            Edit
+        </a>
+        <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.EmployeeId">
+            Delete
+        </a>
+    </td>
+</tr>
+    }
+</table>
