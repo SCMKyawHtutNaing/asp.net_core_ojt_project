@@ -18,19 +18,8 @@ namespace DotNetCoreProject.DAL.Repositories
             _context = context;
         }
 
-        public List<PostViewModel> GetAll()
+        public List<PostViewModel> GetAll(string searchString)
         {
-/*            var query = (from data in _context.Posts
-                         where data.IsDeleted==false
-                         select new PostViewModel
-                         {
-                             Id = data.Id,
-                             Title = data.Title,
-                             Description = data.Description,
-                             PostedUser = data.CreatedUserId.ToString(),
-                             PostedDate = data.CreatedDate
-                         });*/
-
             var query = from p in _context.Posts
                              from u in _context.AspNetUsers
                              where p.CreatedUserId == u.Id & p.IsDeleted==false
@@ -40,8 +29,13 @@ namespace DotNetCoreProject.DAL.Repositories
                                  Title = p.Title,
                                  Description = p.Description,
                                  PostedUser = u.UserName,
-                                 PostedDate = p.CreatedDate
+                                 PostedDate = p.CreatedDate.ToString("yyyy/MM/dd")
                              };
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(p => p.Title!.Contains(searchString) || p.Description!.Contains(searchString));
+            }
 
             return query.ToList();
         }
@@ -55,7 +49,7 @@ namespace DotNetCoreProject.DAL.Repositories
                              Id = data.Id,
                              Title = data.Title,
                              Description = data.Description,
-                             PostedDate = data.CreatedDate
+                             PostedDate = data.CreatedDate.ToString("yyyy/MM/dd")
                          });
 
             return query.FirstOrDefault();

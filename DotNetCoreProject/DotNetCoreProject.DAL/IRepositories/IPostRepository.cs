@@ -10,7 +10,7 @@ namespace DotNetCoreProject.DAL.IRepositories
 {
     public interface IPostRepository
     {
-        List<PostViewModel> GetAll();
+        List<PostViewModel> GetAll(string searchString);
         PostViewModel Get(int id);
         bool Save(Post obj);
         bool Update(Post obj);

@@ -22,7 +22,7 @@ namespace DotNetCoreProject.DTO
         public string PostedUser { get; set; }
         [Required]
         [Display(Name = "Posted Date")]
-        public DateTime PostedDate { get; set; }
+        public string PostedDate { get; set; }
 
         public List<PostViewModel> posts { get; set; }
     }

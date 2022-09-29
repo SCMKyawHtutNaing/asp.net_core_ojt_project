@@ -9,7 +9,7 @@ namespace DotNetCoreProject.BLL.Services.IServices
 {
     public interface IPostService
     {
-        List<PostViewModel> GetAll();
+        List<PostViewModel> GetAll(string searchString);
         PostViewModel Get(int id);
         bool Save(PostViewModel model);
         bool Update(PostViewModel model);

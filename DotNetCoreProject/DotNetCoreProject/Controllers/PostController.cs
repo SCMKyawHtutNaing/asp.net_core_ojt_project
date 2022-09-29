@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DTO;
+using DotNetCoreProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +24,28 @@ namespace DotNetCoreProject.Controllers
         }
 
         // GET: PostController
+        [Authorize, HttpGet]
         public ActionResult Index()
         {
             PostViewModel model = new PostViewModel();
 
-            model.posts = _postService.GetAll();
+/*            model.posts = _postService.GetAll();*/
 
             return View(model);
+        }
+
+        [Authorize, HttpGet]
+        public async Task<ActionResult<DataTableResponse>> GetPosts(string searchString)
+        {
+            var posts = _postService.GetAll(searchString);
+
+            return new DataTableResponse
+            {
+                RecordsTotal = posts.Count(),
+                RecordsFiltered = 10,
+                Data = posts.ToArray()
+            };
+
         }
 
         // GET: PostController/Details/5
