@@ -49,8 +49,16 @@ namespace DotNetCoreProject.DAL.Repositories
                              Id = data.Id,
                              Title = data.Title,
                              Description = data.Description,
-                             PostedDate = data.CreatedDate.ToString("yyyy/MM/dd")
+                             PostedDate = data.CreatedDate.ToString("yyyy/MM/dd"),
+                             Status = data.Status == 1 ? true : false
                          });
+
+            return query.FirstOrDefault();
+        }
+
+        public Post GetEntity(int id)
+        {
+            var query = (from data in _context.Posts where data.Id == id select data);
 
             return query.FirstOrDefault();
         }

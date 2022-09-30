@@ -70,8 +70,26 @@ namespace DotNetCoreProject.Controllers
             try
             {
                 bool success = _postService.Save(model);
-
+                if (success) {
+                TempData["successMessage"] = "Post successfully created!";
+                }
                 return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                ViewData["errorMessage"] = "Post creation failed!";
+                return View();
+            }
+        }
+
+        // POST: PostController/CreateConfirm
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateConfirm(PostViewModel model)
+        {
+            try
+            {
+                return View(model);
             }
             catch
             {
@@ -87,6 +105,21 @@ namespace DotNetCoreProject.Controllers
             return View(model);
         }
 
+        // POST: PostController/CreateConfirm
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditConfirm(PostViewModel model)
+        {
+            try
+            {
+                return View(model);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         // POST: PostController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,11 +128,15 @@ namespace DotNetCoreProject.Controllers
             try
             {
                 bool success = _postService.Update(model);
-
+                if (success)
+                {
+                    TempData["successMessage"] = "Post successfully edited!";
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                ViewData["errorMessage"] = "Post edition failed!";
                 return View();
             }
         }

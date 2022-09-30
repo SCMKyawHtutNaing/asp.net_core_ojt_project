@@ -51,7 +51,13 @@ namespace DotNetCoreProject.BLL.Services
 
         public bool Update(PostViewModel model)
         {
-            bool success = _postRepository.Update(_mapper.Map<Post>(model));
+            var post = _postRepository.GetEntity(model.Id);
+            post.Title = model.Title;
+            post.Description = model.Description;
+            post.Status = model.Status ? 1 : 0;
+            post.UpdatedDate = DateTime.Now;
+            post.UpdatedUserId = 1;
+            bool success = _postRepository.Update(post);
             return success;
         }
 

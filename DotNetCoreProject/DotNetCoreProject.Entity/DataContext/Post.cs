@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 #nullable disable
 
@@ -16,8 +17,10 @@ namespace DotNetCoreProject.Entity.DataContext
         public DateTime CreatedDate { get; set; }
         public int CreatedUserId { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        [DefaultValue(0)]
         public int UpdatedUserId { get; set; }
         public DateTime? DeletedDate { get; set; }
+        [DefaultValue(0)]
         public int DeletedUserId { get; set; }
     }
 }

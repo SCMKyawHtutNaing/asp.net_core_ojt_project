@@ -20,7 +20,7 @@ function drawDataTable(searchString) {
                         { data: "description" },
                         { data: "postedUser" },
                         { data: "postedDate" },
-                        { data: "id", render: function (data) { return '<a class="btn btn-primary">Edit</a><a class="btn btn-danger" style="margin-left: 10px;">Delete</a>' } }
+                        { data: "id", render: function (data) { return '<a class="btn btn-primary" href="/Post/Edit?id=' + data + '">Edit</a><a class="btn btn-danger" style="margin-left: 10px;" href="/Post/Delete?id=' + data + '">Delete</a>' } }
                     ]
                 });
 }

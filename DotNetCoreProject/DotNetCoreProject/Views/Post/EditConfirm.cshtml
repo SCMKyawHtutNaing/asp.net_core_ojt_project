@@ -1,20 +1,12 @@
 ﻿@model DotNetCoreProject.DTO.PostViewModel
 @{
-    ViewData["Title"] = "Edit Post";
+    ViewData["Title"] = "Confirm Edit Post";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@if (ViewData["errorMessage"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
-        @ViewData["errorMessage"]
-    </div>
 }
 
 <h2>@ViewData["Title"]</h2>
 <hr />
-<form asp-action="EditConfirm" method="post" class="my-form needs-validation" novalidate>
+<form asp-action="Edit" method="post" class="my-form needs-validation" novalidate>
     <div class="row">
         <div class="col-md-12">
             <section>
@@ -22,14 +14,14 @@
                 <div class="row mb-3">
                     <label asp-for="Title" class="col-sm-2 col-form-label required"></label>
                     <div class="col-sm-10">
-                        <input asp-for="Title" class="form-control" aria-required="true" />
+                        <input asp-for="Title" class="form-control" aria-required="true" readonly/>
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Description" class="col-sm-2 col-form-label required"></label>
                     <div class="col-sm-10">
-                        <textarea asp-for="Description" class="form-control" autocomplete="current-password" aria-required="true"></textarea>
+                        <textarea asp-for="Description" class="form-control" autocomplete="current-password" aria-required="true" readonly></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                 </div>
@@ -37,15 +29,15 @@
                     <label asp-for="Status" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-10">
                         <label class="switch" style="font-size: 1rem">
-                            <input type="checkbox" asp-for="Status">
+                            <input type="checkbox" asp-for="Status" readonly>
                             <span class="slider round"></span>
                         </label>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="col-sm-2 btn btn-primary">Edit</button>
-                        <button type="reset" class="col-sm-2 btn btn-primary">Clear</button>
+                        <button type="submit" class="col-sm-2 btn btn-primary">Confirm</button>
+                        <a href='javascript:history.go(-1)' class="col-sm-2 btn btn-primary">Cancel</a>
                     </div>
                 </div>
             </section>
@@ -53,9 +45,7 @@
     </div>
 </form>
 
-
-
 @section scripts
-    {
+{
     <partial name="_ValidationScriptsPartial" />
 }
