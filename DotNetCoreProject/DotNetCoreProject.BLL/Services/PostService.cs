@@ -51,7 +51,7 @@ namespace DotNetCoreProject.BLL.Services
 
         public bool Update(PostViewModel model)
         {
-            var post = _postRepository.GetEntity(model.Id);
+            Post post = _postRepository.GetEntity(model.Id);
             post.Title = model.Title;
             post.Description = model.Description;
             post.Status = model.Status ? 1 : 0;
