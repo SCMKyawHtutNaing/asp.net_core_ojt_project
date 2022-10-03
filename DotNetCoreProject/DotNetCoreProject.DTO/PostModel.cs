@@ -18,10 +18,14 @@ namespace DotNetCoreProject.DTO
         [StringLength(255, ErrorMessage = "255 characters is the maximum allowed.")]
         [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Posted User")]
-        public string PostedUser { get; set; }
-        [Display(Name = "Posted Date")]
-        public string PostedDate { get; set; }
+        [Display(Name = "Created User")]
+        public string CreatedUser { get; set; }
+        [Display(Name = "Created Date")]
+        public string CreatedDate { get; set; }
+        [Display(Name = "Updated User")]
+        public string UpdatedUser { get; set; }
+        [Display(Name = "Updated Date")]
+        public string UpdatedDate { get; set; }
         public bool Status { get; set; }
 
         public List<PostViewModel> posts { get; set; }

@@ -129,3 +129,29 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+a {
+    text-decoration: none;
+}
+
+.link-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    color: #0077cc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}
+
+html {
+    overflow-y: scroll !important;
+}
+
+p.detail-val {
+    font-style: italic;
+    color: darkorange;
+}

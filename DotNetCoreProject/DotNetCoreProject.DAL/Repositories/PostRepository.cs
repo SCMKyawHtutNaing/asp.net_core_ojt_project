@@ -28,8 +28,8 @@ namespace DotNetCoreProject.DAL.Repositories
                                  Id = p.Id,
                                  Title = p.Title,
                                  Description = p.Description,
-                                 PostedUser = u.UserName,
-                                 PostedDate = p.CreatedDate.ToString("yyyy/MM/dd")
+                                 CreatedUser = u.UserName,
+                                 CreatedDate = p.CreatedDate.ToString("yyyy/MM/dd")
                              };
 
             if (!String.IsNullOrEmpty(searchString))
@@ -42,16 +42,23 @@ namespace DotNetCoreProject.DAL.Repositories
 
         public PostViewModel Get(int id)
         {
-            var query = (from data in _context.Posts
-                         where data.Id == id
-                         select new PostViewModel
-                         {
-                             Id = data.Id,
-                             Title = data.Title,
-                             Description = data.Description,
-                             PostedDate = data.CreatedDate.ToString("yyyy/MM/dd"),
-                             Status = data.Status == 1 ? true : false
-                         });
+            var query = from p in _context.Posts
+                        where p.Id == id & p.IsDeleted == false
+                        from c in _context.AspNetUsers
+                        where p.CreatedUserId == c.Id
+                        from u in _context.AspNetUsers
+                        where p.UpdatedUserId == u.Id
+                        select new PostViewModel
+                        {
+                            Id = p.Id,
+                            Title = p.Title,
+                            Description = p.Description,
+                            CreatedUser = c.UserName,
+                            CreatedDate = p.CreatedDate.ToString("yyyy/MM/dd"),
+                            UpdatedUser = u.UserName,
+                            UpdatedDate = p.UpdatedDate != null ? p.UpdatedDate.Value.ToString("yyyy/MM/dd") : "",
+                            Status = p.Status == 1 ? true : false
+                        };
 
             return query.FirstOrDefault();
         }
@@ -88,27 +95,6 @@ namespace DotNetCoreProject.DAL.Repositories
             try
             {
                 _context.Posts.Update(obj);
-                _context.SaveChanges();
-
-                success = true;
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return success;
-        }
-
-        public bool Delete(int id)
-        {
-            bool success = false;
-            try
-            {
-                Post post = _context.Posts.FirstOrDefault(x => x.Id == id);
-
-                _context.Posts.Remove(post);
                 _context.SaveChanges();
 
                 success = true;

@@ -49,11 +49,19 @@ namespace DotNetCoreProject.Controllers
         }
 
         // GET: PostController/Details/5
-        public ActionResult Details(int id)
+/*        public ActionResult Details(int id)
         {
             PostViewModel model = _postService.Get(id);
 
-            return View(model);
+            return PartialView("DetailsPartial", model);
+        }*/
+
+        [Authorize, HttpGet]
+        public async Task<PostViewModel> Details(int id)
+        {
+            PostViewModel model = _postService.Get(id);
+
+            return model;
         }
 
         // GET: PostController/Create
@@ -146,7 +154,10 @@ namespace DotNetCoreProject.Controllers
         {
             bool success = _postService.Delete(id);
 
-
+            if (success)
+            {
+                TempData["successMessage"] = "Post deleted successfully!";
+            }
             return RedirectToAction(nameof(Index));
         }
 

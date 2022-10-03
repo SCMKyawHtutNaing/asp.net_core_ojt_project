@@ -59,3 +59,107 @@
 </thead>
 </table>
 
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Post Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <section>
+                            <div class="row mb-3">
+                                <label asp-for="Title" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailTitle"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Description" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailDescription"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Status" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailStatus"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="CreatedDate" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailCreatedDate"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="CreatedUser" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailCreatedUser"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="UpdatedDate" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailUpdatedDate"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="UpdatedUser" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val" id="detailUpdatedUser"></p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Post Delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <section>
+                        <div class="row mb-3">
+                            <label asp-for="Title" class="col-sm-4"></label>
+                            <div class="col-sm-8">
+                                <p class="detail-val" id="deleteTitle"></p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Description" class="col-sm-4"></label>
+                            <div class="col-sm-8">
+                                <p class="detail-val" id="deleteDescription"></p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Status" class="col-sm-4"></label>
+                            <div class="col-sm-8">
+                                <p class="detail-val" id="deleteStatus"></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer" id="deleteModalFooter">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

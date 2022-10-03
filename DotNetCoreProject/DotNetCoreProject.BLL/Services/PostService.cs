@@ -63,7 +63,11 @@ namespace DotNetCoreProject.BLL.Services
 
         public bool Delete(int id)
         {
-            bool success = _postRepository.Delete(id);
+            Post post = _postRepository.GetEntity(id);
+            post.IsDeleted = true;
+            post.DeletedDate = DateTime.Now;
+            post.DeletedUserId = 1;
+            bool success = _postRepository.Update(post);
             return success;
         }
     }

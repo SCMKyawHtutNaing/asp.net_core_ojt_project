@@ -15,6 +15,5 @@ namespace DotNetCoreProject.DAL.IRepositories
         Post GetEntity(int id);
         bool Save(Post obj);
         bool Update(Post obj);
-        bool Delete(int id);
     }
 }
