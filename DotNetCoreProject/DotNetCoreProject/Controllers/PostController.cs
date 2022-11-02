@@ -1,15 +1,19 @@
-﻿using AutoMapper;
+﻿using ClosedXML.Excel;
+using CsvHelper;
+using CsvHelper.Configuration;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DTO;
 using DotNetCoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Data;
+using System.Data.Common;
+using System.Formats.Asn1;
+using System.Globalization;
+using System.Text;
 
 namespace DotNetCoreProject.Controllers
 {
@@ -27,17 +31,15 @@ namespace DotNetCoreProject.Controllers
         [Authorize, HttpGet]
         public ActionResult Index()
         {
-            PostViewModel model = new PostViewModel();
-
-/*            model.posts = _postService.GetAll();*/
-
-            return View(model);
+            return View();
         }
 
         [Authorize, HttpGet]
         public async Task<ActionResult<DataTableResponse>> GetPosts(string searchString)
         {
             var posts = _postService.GetAll(searchString);
+
+            HttpContext.Session.SetComplexData("sessionPostList", posts);
 
             return new DataTableResponse
             {
@@ -47,14 +49,6 @@ namespace DotNetCoreProject.Controllers
             };
 
         }
-
-        // GET: PostController/Details/5
-/*        public ActionResult Details(int id)
-        {
-            PostViewModel model = _postService.Get(id);
-
-            return PartialView("DetailsPartial", model);
-        }*/
 
         [Authorize, HttpGet]
         public async Task<PostViewModel> Details(int id)
@@ -161,6 +155,115 @@ namespace DotNetCoreProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
+        public ActionResult Download()
+        {
+            List<PostViewModel> lst = HttpContext.Session.GetComplexData<List<PostViewModel>>("sessionPostList");
 
+            var cc = new CsvConfiguration(new System.Globalization.CultureInfo("en-US"));
+            using (var ms = new MemoryStream())
+            {
+                using (var sw = new StreamWriter(stream: ms, encoding: new UTF8Encoding(true)))
+                {
+                    using (var cw = new CsvWriter(sw, cc))
+                    {
+                        cw.WriteRecords(lst);
+                    }
+                    return File(ms.ToArray(), "text/csv", $"export_{DateTime.UtcNow.Ticks}.csv");
+                }
+            }
+        }
+
+        [Authorize, HttpGet]
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
+        [Authorize, HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Upload([FromForm] IFormFile file)
+        {
+            if (file == null) {
+                ViewData["errorMessage"] = "Please choose a file.";
+
+                return View();
+            }
+
+            var fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension != ".csv") {
+                ViewData["errorMessage"] = "Please choose a csv format.";
+
+                return View();
+            }
+
+            try
+            {
+                var fileName = Guid.NewGuid().ToString() + fileExtension;
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", fileName);
+                using (FileStream fs = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(fs);
+                }
+                using (var reader = new StreamReader(filePath))
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    var records = csv.GetRecords<PostCSVModel>();
+
+                    foreach (var record in records)
+                    {
+                        if (string.IsNullOrWhiteSpace(record.Title) || string.IsNullOrWhiteSpace(record.Description))
+                        {
+                            break;
+                        }
+                        PostViewModel post;
+                        post = _postService.Get(record.Title);
+
+                        if (post == null)
+                        {
+                            post = new PostViewModel();
+                        }
+
+                        post.Title = record.Title;
+                        post.Description = record.Description;
+                        post.Status = bool.Parse(record.Status.ToString());
+
+                        if (post.Id <= 0)
+                            _postService.Save(post);
+                        else
+                            _postService.Update(post);
+                    }
+                }
+
+                TempData["successMessage"] = "Post CSV successfully uploaded!";
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                ViewData["errorMessage"] = "Post upload csv must have 3 columns: Title, Description and Status.";
+
+                return View();
+            }
+        }
+
+    }
+
+    public static class SessionExtensions
+    {
+        public static T GetComplexData<T>(this ISession session, string key)
+        {
+            var data = session.GetString(key);
+            if (data == null)
+            {
+                return default(T);
+            }
+            return JsonConvert.DeserializeObject<T>(data);
+        }
+
+        public static void SetComplexData(this ISession session, string key, object value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
     }
 }

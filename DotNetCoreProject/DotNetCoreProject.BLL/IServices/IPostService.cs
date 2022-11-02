@@ -1,9 +1,5 @@
 ﻿using DotNetCoreProject.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace DotNetCoreProject.BLL.Services.IServices
 {
@@ -11,8 +7,10 @@ namespace DotNetCoreProject.BLL.Services.IServices
     {
         List<PostViewModel> GetAll(string searchString);
         PostViewModel Get(int id);
+        PostViewModel Get(string title);
         bool Save(PostViewModel model);
         bool Update(PostViewModel model);
         bool Delete(int id);
+        DataTable GetDataTableForDownload(string searchString);
     }
 }

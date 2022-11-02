@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
+using ClosedXML.Excel;
 using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DAL.IRepositories;
 using DotNetCoreProject.DTO;
 using DotNetCoreProject.Entity.DataContext;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Web;
 
 namespace DotNetCoreProject.BLL.Services
 {
@@ -32,6 +27,13 @@ namespace DotNetCoreProject.BLL.Services
         public PostViewModel Get(int id)
         {
             PostViewModel model = _postRepository.Get(id);
+            return model;
+        }
+
+
+        public PostViewModel Get(string title)
+        {
+            PostViewModel model = _postRepository.Get(title);
             return model;
         }
 
@@ -69,6 +71,19 @@ namespace DotNetCoreProject.BLL.Services
             post.DeletedUserId = 1;
             bool success = _postRepository.Update(post);
             return success;
+        }
+        public DataTable GetDataTableForDownload(string searchString) {
+            List<PostViewModel> lst = _postRepository.GetAll(searchString);
+
+            DataTable dt = new DataTable("Grid");
+            dt.Columns.AddRange(new DataColumn[4] { new DataColumn("Title"), new DataColumn("Description"), new DataColumn("Posted User"), new DataColumn("Posted Date") });
+
+            foreach (var emp in lst)
+            {
+                dt.Rows.Add(emp.Title, emp.Description, emp.CreatedUser, emp.CreatedDate);
+            }
+
+            return dt;
         }
     }
 }

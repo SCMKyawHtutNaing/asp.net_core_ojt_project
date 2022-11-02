@@ -22,7 +22,7 @@ namespace DotNetCoreProject.IoC
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDbContext<EmployeeDBContext>(options =>
+            services.AddDbContext<DBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
@@ -43,6 +43,8 @@ namespace DotNetCoreProject.IoC
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

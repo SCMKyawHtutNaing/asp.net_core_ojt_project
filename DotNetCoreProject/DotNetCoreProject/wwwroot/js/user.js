@@ -1,5 +1,6 @@
 ﻿var searchString;
 var postTable;
+var i = 1;
 
 $(document).ready(function () {
     drawDataTable("");
@@ -29,21 +30,28 @@ function showDeleteModal(data) {
 
 function drawDataTable(searchString) {
     postTable =
-        $('#postTable').DataTable({
+        $('#userTable').DataTable({
             processing: true,
             ordering: true,
             paging: true,
             searching: true,
-            ajax: "Post/GetPosts?searchString=" + searchString,
+            ajax: "User/GetUsers?searchString=" + searchString,
             columnDefs: [
-                { className: "dt-center", targets: [0, 1, 2, 3, 4] }
+                { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
             ],
             columns: [
-                { data: "id", render: function (data, type, row) { return '<button type="button" class="link-button" onclick="getDetails(' + data + ')" data-toggle="modal" data-target="#detailsModal"> ' + row.title + '</button>' } },
-                { data: "description" },
+                {
+                    "render": function (data, type, full, meta) {
+                        return i++;
+                    }
+                },
+                { data: "name" },
+                { data: "email" },
                 { data: "createdUser" },
-                { data: "createdDate" },
-                { data: "id", render: function (data, type, row) { return '<a class="btn btn-primary" href="/Post/Edit?id=' + data + '">Edit</a><button type="button" class="btn btn-danger" style="margin-left: 5px;" data-toggle="modal" data-target="#deleteModal">Delete</button>' } }
+                { data: "type" },
+                { data: "phone" },
+                { data: "dob" },
+                { data: "address" }
             ]
         });
 }

@@ -27,7 +27,13 @@ namespace DotNetCoreProject.DTO
         [Display(Name = "Updated Date")]
         public string UpdatedDate { get; set; }
         public bool Status { get; set; }
-
         public List<PostViewModel> posts { get; set; }
+    }
+
+    public class PostCSVModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public bool Status { get; set; }
     }
 }

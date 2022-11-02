@@ -18,6 +18,7 @@ namespace DotNetCoreProject.Entity.DataContext
         public int Id { get; set; }
         public int AccessFailedCount { get; set; }
         public string ConcurrencyStamp { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public bool LockoutEnabled { get; set; }
@@ -29,7 +30,18 @@ namespace DotNetCoreProject.Entity.DataContext
         public bool PhoneNumberConfirmed { get; set; }
         public string SecurityStamp { get; set; }
         public bool TwoFactorEnabled { get; set; }
-        public string UserName { get; set; }
+        public string Address { get; set; }
+        public DateTime? DOB { get; set; }
+        public int Role { get; set; }
+        public byte[] profile { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int CreatedUserId { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedUserId { get; set; }
+        public DateTime? DeletedDate { get; set; }
+        public int? DeletedUserId { get; set; }
 
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

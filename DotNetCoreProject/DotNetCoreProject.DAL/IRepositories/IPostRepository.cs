@@ -12,6 +12,7 @@ namespace DotNetCoreProject.DAL.IRepositories
     {
         List<PostViewModel> GetAll(string searchString);
         PostViewModel Get(int id);
+        PostViewModel Get(string title);
         Post GetEntity(int id);
         bool Save(Post obj);
         bool Update(Post obj);

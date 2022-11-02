@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Upload CSV File";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        @ViewData["successMessage"]
+    </div>
+}
+
+@if (ViewData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        @ViewData["errorMessage"]
+    </div>
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<form asp-action="Upload" method="post" class="my-form" enctype="multipart/form-data">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <section>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label required">CSV File</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="file" name="file" accept=".csv" tabindex="14">
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="col-sm-2 btn btn-primary">Upload</button>
+                        <button type="reset" class="col-sm-2 btn btn-primary">Clear</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</form>
+
+
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

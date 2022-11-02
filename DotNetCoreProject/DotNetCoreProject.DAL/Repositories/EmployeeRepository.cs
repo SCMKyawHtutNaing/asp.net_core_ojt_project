@@ -11,8 +11,8 @@ namespace DotNetCoreProject.DAL.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly EmployeeDBContext _context;
-        public EmployeeRepository(EmployeeDBContext context)
+        private readonly DBContext _context;
+        public EmployeeRepository(DBContext context)
         {
             _context = context;
         }

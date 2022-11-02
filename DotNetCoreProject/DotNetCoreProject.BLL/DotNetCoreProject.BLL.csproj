@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.97.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DotNetCoreProject.DAL\DotNetCoreProject.DAL.csproj" />
     <ProjectReference Include="..\DotNetCoreProject.DTO\DotNetCoreProject.DTO.csproj" />
     <ProjectReference Include="..\DotNetCoreProject.Entity\DotNetCoreProject.Entity.csproj" />
