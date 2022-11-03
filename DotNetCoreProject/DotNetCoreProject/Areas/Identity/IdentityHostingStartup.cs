@@ -1,5 +1,7 @@
 ﻿using System;
 using DotNetCoreProject.Data;
+using DotNetCoreProject.Entity.DataContext;
+using DotNetCoreProject.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -19,8 +21,10 @@ namespace DotNetCoreProject.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<ApplicationDBContext>();
+/*                services.AddDefaultIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddEntityFrameworkStores<ApplicationDBContext>();*/
+
+                services.AddIdentity<AspNetUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>();
             });
         }
     }

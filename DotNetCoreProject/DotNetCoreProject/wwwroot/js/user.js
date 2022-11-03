@@ -4,18 +4,27 @@ var i = 1;
 
 $(document).ready(function () {
     drawDataTable("");
+
+    $("#fromSearchString").datepicker({ minDate: -20, maxDate: "+1M +15D" });
+    $("#toSearchString").datepicker({ minDate: -20, maxDate: "+1M +15D" });
+
 });
 
 function getDetails(id) {
-    $.get("/Post/Details", { id: id },
+    e.preventDefault();
+
+    $.get("/User/Details", { id : id },
         function (data, status) {
-            $("#detailTitle").text(data.title);
-            $("#detailDescription").text(data.description);
-            $("#detailStatus").text(data.status ? "Active" : "Inactive");
+            $("#detailName").text(data.name);
+            $("#detailType").text(data.type);
+            $("#detailEmail").text(data.email);
+            $("#detailPhone").text(data.phone);
+            $("#detailDOB").text(data.dob);
+            $("#detailAddress").text(data.address == "" ? "No address filled." : data.address);
             $("#detailCreatedDate").text(data.createdDate);
             $("#detailCreatedUser").text(data.createdUser);
             $("#detailUpdatedDate").text(data.updatedDate == "" ? "Have not been updated." : data.updatedDate);
-            $("#detailUpdatedUser").text(data.updatedUser == "" ? "Have not been updated." : data.updatedUser);
+            $("#detailUpdatedUser").text(data.updatedeUser == "" ? "Have not been updated." : data.updatedUser);
             $('#detailsModal').modal('show');
         });
 }
@@ -35,6 +44,7 @@ function drawDataTable(searchString) {
             ordering: true,
             paging: true,
             searching: true,
+            responsive: true,
             ajax: "User/GetUsers?searchString=" + searchString,
             columnDefs: [
                 { className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] }
@@ -45,7 +55,7 @@ function drawDataTable(searchString) {
                         return i++;
                     }
                 },
-                { data: "name" },
+                { data: "id", render: function (data, type, row) { return '<button type="button" class="link-button" onclick="getDetails(\'' + data + '\')" data-toggle="modal" data-target="#detailsModal"> ' + row.name + '</button>' } },
                 { data: "email" },
                 { data: "createdUser" },
                 { data: "type" },

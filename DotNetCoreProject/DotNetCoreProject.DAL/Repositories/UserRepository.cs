@@ -23,15 +23,15 @@ namespace DotNetCoreProject.DAL.Repositories
             {
                 var query = from user in _context.AspNetUsers
                             from createdUser in _context.AspNetUsers
-                                .Where(u => u.Id == user.CreatedUserId).DefaultIfEmpty()
+                                .Where(u => u.Id.Equals(user.CreatedUserId)).DefaultIfEmpty()
                             from updatedUser in _context.AspNetUsers
-                                .Where(u => u.Id == user.UpdatedUserId).DefaultIfEmpty()
+                                .Where(u => u.Id.Equals(user.UpdatedUserId)).DefaultIfEmpty()
                             select new UserViewModel
                             {
                                 Id = user.Id,
                                 Name = user.UserName,
                                 Email = user.Email,
-                                CreatedUser = createdUser.UserName,
+                                CreatedUser = createdUser.UserName != null ? createdUser.UserName : "",
                                 CreatedDate = user.CreatedDate.ToString("yyyy/MM/dd"),
                                 UpdatedUser = updatedUser.UserName != null ? updatedUser.UserName : "",
                                 UpdatedDate = user.UpdatedDate != null ? user.UpdatedDate.Value.ToString("yyyy/MM/dd") : "",
@@ -50,6 +50,39 @@ namespace DotNetCoreProject.DAL.Repositories
             }
             catch (Exception e) {
                 return new List<UserViewModel> { new UserViewModel() };
+            }
+        }
+
+        public UserViewModel Get(string id)
+        {
+            try
+            {
+                var query = from user in _context.AspNetUsers where user.Id.Equals(id)
+                            from createdUser in _context.AspNetUsers
+                                .Where(u => u.Id.Equals(user.CreatedUserId)).DefaultIfEmpty()
+                            from updatedUser in _context.AspNetUsers
+                                .Where(u => u.Id.Equals(user.UpdatedUserId)).DefaultIfEmpty()
+                            select new UserViewModel
+                            {
+                                Id = user.Id,
+                                Name = user.UserName,
+                                Email = user.Email,
+                                CreatedUser = createdUser.UserName != null ? createdUser.UserName : "",
+                                CreatedDate = user.CreatedDate.ToString("yyyy/MM/dd"),
+                                UpdatedUser = updatedUser.UserName != null ? updatedUser.UserName : "",
+                                UpdatedDate = user.UpdatedDate != null ? user.UpdatedDate.Value.ToString("yyyy/MM/dd") : "",
+                                Type = user.Role == 0 ? "Admin" : "User",
+                                Address = user.Address,
+                                Phone = user.PhoneNumber,
+                                DOB = user.DOB != null ? user.DOB.Value.ToString("yyyy/MM/dd") : "",
+                                Profile = user.Profile != null ? Convert.ToBase64String(user.Profile) : null
+            };
+
+                return query.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                return new UserViewModel();
             }
         }
 

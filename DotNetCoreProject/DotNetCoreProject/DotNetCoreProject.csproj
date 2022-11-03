@@ -21,7 +21,7 @@
     <PackageReference Include="CsvHelper" Version="30.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
@@ -32,6 +32,10 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetCoreProject.Entity\DotNetCoreProject.Entity.csproj" />
     <ProjectReference Include="..\DotNetCoreProject.IoC\DotNetCoreProject.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\jquery-ui\" />
   </ItemGroup>
 
 </Project>

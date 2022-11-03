@@ -1,0 +1,100 @@
+﻿@model DotNetCoreProject.DTO.UserViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        @ViewData["errorMessage"]
+    </div>
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<form asp-action="Create" method="post" class="my-form needs-validation" novalidate enctype="multipart/form-data">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+            <section>
+                <div class="row mb-3">
+                    <label asp-for="Name" class="col-sm-4 col-form-label required"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Name" class="form-control" aria-required="true" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Email" class="col-sm-4 col-form-label required"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Email" class="form-control" aria-required="true"></input>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Password" class="col-sm-4 col-form-label required"></label>
+                    <div class="col-sm-8">
+                        <input type="password" asp-for="Password" class="form-control" aria-required="true"></input>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="ConfirmedPassword" class="col-sm-4 col-form-label required"></label>
+                    <div class="col-sm-8">
+                        <input type="password" asp-for="ConfirmedPassword" class="form-control" aria-required="true"></input>
+                        <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Type" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Type" class="form-control" aria-required="true"></input>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Phone" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Phone" class="form-control"></input>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="DOB" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="DOB" class="form-control"></input>
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Address" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="Address" class="form-control"></input>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label required">Profile</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="file" name="file" tabindex="14">
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-8 offset-sm-4">
+                        <button type="submit" class="col-sm-3 btn btn-primary">Register</button>
+                        <button type="reset" class="col-sm-3 btn btn-dark">Clear</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</form>
+
+
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,14 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using DotNetCoreProject.Entity.DataContext
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<AspNetUser> SignInManager
+@inject UserManager<AspNetUser> UserManager
 
 
 @if (SignInManager.IsSignedIn(User))
 {
     <ul class="navbar-nav flex-grow-1">
         <li class="nav-item">
-            <a class="nav-link text-dark">Users</a>
+            <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Post" asp-action="Index">Posts</a>

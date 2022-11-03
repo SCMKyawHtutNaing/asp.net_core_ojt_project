@@ -1,6 +1,11 @@
-﻿using DotNetCoreProject.DTO;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using DotNetCoreProject.Data;
+using DotNetCoreProject.DTO;
+using DotNetCoreProject.Entity.DataContext;
+using DotNetCoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,14 +16,15 @@ namespace DotNetCoreProject.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AspNetUser> _userManager;
+        private readonly SignInManager<AspNetUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-                                      SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<AspNetUser> userManager, SignInManager<AspNetUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -33,18 +39,29 @@ namespace DotNetCoreProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            //await _roleManager.CreateAsync(new IdentityRole("ADMIN"));
+            //await _roleManager.CreateAsync(new IdentityRole("USER"));
+
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new AspNetUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
+                    Address = "Tamwe",
+                    Role = 1,
+                    CreatedDate = DateTime.Now,
+                    CreatedUserId = "1"
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    var defaultrole = _roleManager.FindByNameAsync("ADMIN").Result;
+                    
+                    await _userManager.AddToRoleAsync(user, defaultrole.Name);
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     return RedirectToAction("index", "Home");

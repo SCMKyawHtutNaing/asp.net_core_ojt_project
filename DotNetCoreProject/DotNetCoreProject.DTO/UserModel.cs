@@ -10,7 +10,7 @@ namespace DotNetCoreProject.DTO
 {
     public class UserViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required(ErrorMessage = "Name can't be blank.")]
         [Display(Name = "Name")]
         public string Name { get; set; }
@@ -42,6 +42,7 @@ namespace DotNetCoreProject.DTO
         public string UpdatedUser { get; set; }
         [Display(Name = "Updated Date")]
         public string UpdatedDate { get; set; }
+        public string Profile { get; set; }
         public List<UserViewModel> users { get; set; }
     }
 }

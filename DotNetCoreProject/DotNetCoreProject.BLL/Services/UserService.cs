@@ -26,5 +26,11 @@ namespace DotNetCoreProject.BLL.Services
             List<UserViewModel> lst = _userRepository.GetAll(searchString);
             return lst;
         }
+
+        public UserViewModel Get(string id)
+        {
+            UserViewModel model = _userRepository.Get(id);
+            return model;
+        }
     }
 }

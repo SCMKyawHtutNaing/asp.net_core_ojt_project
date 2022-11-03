@@ -30,7 +30,6 @@ namespace DotNetCoreProject.BLL.Services
             return model;
         }
 
-
         public PostViewModel Get(string title)
         {
             PostViewModel model = _postRepository.Get(title);
@@ -46,7 +45,7 @@ namespace DotNetCoreProject.BLL.Services
             post.IsActive = true;
             post.IsDeleted = false;
             post.CreatedDate = DateTime.Now;
-            post.CreatedUserId = 1;
+            post.CreatedUserId = "1";
             bool success = _postRepository.Save(post);
             return success;
         }
@@ -58,7 +57,7 @@ namespace DotNetCoreProject.BLL.Services
             post.Description = model.Description;
             post.Status = model.Status ? 1 : 0;
             post.UpdatedDate = DateTime.Now;
-            post.UpdatedUserId = 1;
+            post.UpdatedUserId = "1";
             bool success = _postRepository.Update(post);
             return success;
         }
@@ -68,7 +67,7 @@ namespace DotNetCoreProject.BLL.Services
             Post post = _postRepository.GetEntity(id);
             post.IsDeleted = true;
             post.DeletedDate = DateTime.Now;
-            post.DeletedUserId = 1;
+            post.DeletedUserId = "1";
             bool success = _postRepository.Update(post);
             return success;
         }

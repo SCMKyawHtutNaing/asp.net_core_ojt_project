@@ -23,12 +23,12 @@ namespace DotNetCoreProject.Entity.DataContext
         public bool IsDeleted { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime CreatedDate { get; set; }
-        public int CreatedUserId { get; set; }
+        public string? CreatedUserId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? UpdatedDate { get; set; }
-        public int? UpdatedUserId { get; set; }
+        public string? UpdatedUserId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? DeletedDate { get; set; }
-        public int? DeletedUserId { get; set; }
+        public string? DeletedUserId { get; set; }
     }
 }

@@ -11,10 +11,6 @@ namespace DotNetCoreProject.DAL.IRepositories
     public interface IUserRepository
     {
         List<UserViewModel> GetAll(string searchString);
-/*        UserViewModel Get(int id);
         UserViewModel Get(string title);
-        AspNetUser GetEntity(int id);
-        bool Save(AspNetUser obj);
-        bool Update(AspNetUser obj);*/
     }
 }
