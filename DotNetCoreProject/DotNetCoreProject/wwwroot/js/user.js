@@ -32,9 +32,11 @@ function getDetails(id) {
             $("#detailCreatedUser").text(data.createdUser);
             $("#detailUpdatedDate").text(data.updatedDate == "" ? "Have not been updated." : data.updatedDate);
             $("#detailUpdatedUser").text(data.updatedUser == "" ? "Have not been updated." : data.updatedUser);
-            $("#detailProfile").attr("src", "data:image/jpg;base64," + data.profile);
-            $("#detailProfile").attr("width", "100%");
-            $("#detailProfile").attr("height", "auto");
+            if (data.profile != null) {
+                $("#detailProfile").attr("src", "data:image/jpg;base64," + data.profile);
+            }
+            //$("#detailProfile").attr("width", "100%");
+            //$("#detailProfile").attr("height", "auto");
             $('#detailsModal').modal('show');
         }
     });
