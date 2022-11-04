@@ -10,6 +10,7 @@ namespace DotNetCoreProject.DTO
 {
     public class PostViewModel
     {
+        [Display(Name = "ID")]
         public int Id { get; set; }
         [Required(ErrorMessage = "Title can't be blank.")]
         [Display(Name = "Title")]

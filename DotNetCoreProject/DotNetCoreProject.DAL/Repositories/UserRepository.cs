@@ -17,11 +17,42 @@ namespace DotNetCoreProject.DAL.Repositories
             _context = context;
         }
 
-        public List<UserViewModel> GetAll(string searchString)
+        public List<UserViewModel> GetAll(string nameSearchString, string emailSearchString, string fromSearchString, string toSearchString)
         {
             try
             {
-                var query = from user in _context.AspNetUsers
+
+                IQueryable<UserViewModel> query;
+
+                if ((!String.IsNullOrEmpty(fromSearchString)) && !String.IsNullOrEmpty(toSearchString))
+                {
+                    var fromDate = Convert.ToDateTime(fromSearchString).Date;
+                    var toDate = Convert.ToDateTime(toSearchString).Date;
+
+                    query = from user in _context.AspNetUsers
+                                   .Where(u => u.CreatedDate.Date >= fromDate && u.CreatedDate.Date <= toDate)
+                            from createdUser in _context.AspNetUsers
+                                   .Where(u => u.Id.Equals(user.CreatedUserId)).DefaultIfEmpty()
+                            from updatedUser in _context.AspNetUsers
+                                   .Where(u => u.Id.Equals(user.UpdatedUserId)).DefaultIfEmpty()
+                            select new UserViewModel
+                            {
+                                Id = user.Id,
+                                Name = user.UserName,
+                                Email = user.Email,
+                                CreatedUser = createdUser.UserName != null ? createdUser.UserName : "",
+                                CreatedDate = user.CreatedDate.ToString("yyyy/MM/dd"),
+                                UpdatedUser = updatedUser.UserName != null ? updatedUser.UserName : "",
+                                UpdatedDate = user.UpdatedDate != null ? user.UpdatedDate.Value.ToString("yyyy/MM/dd") : "",
+                                Type = user.Role == 0 ? "Admin" : "User",
+                                Address = user.Address,
+                                Phone = user.PhoneNumber,
+                                DOB = user.DOB != null ? user.DOB.Value.ToString("yyyy/MM/dd") : "",
+                            };
+                }
+                else
+                {
+                    query = from user in _context.AspNetUsers
                             from createdUser in _context.AspNetUsers
                                 .Where(u => u.Id.Equals(user.CreatedUserId)).DefaultIfEmpty()
                             from updatedUser in _context.AspNetUsers
@@ -40,15 +71,22 @@ namespace DotNetCoreProject.DAL.Repositories
                                 Phone = user.PhoneNumber,
                                 DOB = user.DOB != null ? user.DOB.Value.ToString("yyyy/MM/dd") : "",
                             };
+                }
 
-                if (!String.IsNullOrEmpty(searchString))
+                if (!String.IsNullOrEmpty(nameSearchString))
                 {
-                    query = query.Where(p => p.Name!.Contains(searchString) || p.Name!.Contains(searchString));
+                    query = query.Where(p => p.Name.Contains(nameSearchString));
+                }
+
+                if (!String.IsNullOrEmpty(emailSearchString))
+                {
+                    query = query.Where(p => p.Email.Contains(emailSearchString));
                 }
 
                 return query.ToList();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 return new List<UserViewModel> { new UserViewModel() };
             }
         }
@@ -57,7 +95,8 @@ namespace DotNetCoreProject.DAL.Repositories
         {
             try
             {
-                var query = from user in _context.AspNetUsers where user.Id.Equals(id)
+                var query = from user in _context.AspNetUsers
+                            where user.Id.Equals(id)
                             from createdUser in _context.AspNetUsers
                                 .Where(u => u.Id.Equals(user.CreatedUserId)).DefaultIfEmpty()
                             from updatedUser in _context.AspNetUsers
@@ -76,7 +115,7 @@ namespace DotNetCoreProject.DAL.Repositories
                                 Phone = user.PhoneNumber,
                                 DOB = user.DOB != null ? user.DOB.Value.ToString("yyyy/MM/dd") : "",
                                 Profile = user.Profile != null ? Convert.ToBase64String(user.Profile) : null
-            };
+                            };
 
                 return query.FirstOrDefault();
             }

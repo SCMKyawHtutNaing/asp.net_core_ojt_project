@@ -155,3 +155,12 @@ p.detail-val {
     font-style: italic;
     color: darkorange;
 }
+
+p.detail-val-alt {
+    font-weight: bold;
+}
+
+
+.modal-header .btn-close {
+    margin: 0 !important;
+}

@@ -9,7 +9,7 @@ namespace DotNetCoreProject.BLL.Services.IServices
 {
     public interface IUserService
     {
-        List<UserViewModel> GetAll(string searchString);
+        List<UserViewModel> GetAll(string nameSearchString, string emailSearchString, string fromSearchString, string toSearchString);
         UserViewModel Get(string id);
     }
 }

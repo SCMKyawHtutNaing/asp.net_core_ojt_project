@@ -10,7 +10,7 @@ namespace DotNetCoreProject.DAL.IRepositories
 {
     public interface IUserRepository
     {
-        List<UserViewModel> GetAll(string searchString);
+        List<UserViewModel> GetAll(string nameSearchString, string emailSearchString, string fromSearchString, string toSearchString);
         UserViewModel Get(string title);
     }
 }

@@ -21,9 +21,9 @@ namespace DotNetCoreProject.BLL.Services
             _mapper = mapper;
         }
 
-        public List<UserViewModel> GetAll(string searchString)
+        public List<UserViewModel> GetAll(string nameSearchString, string emailSearchString, string fromSearchString, string toSearchString)
         {
-            List<UserViewModel> lst = _userRepository.GetAll(searchString);
+            List<UserViewModel> lst = _userRepository.GetAll(nameSearchString, emailSearchString, fromSearchString, toSearchString);
             return lst;
         }
 

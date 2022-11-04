@@ -31,9 +31,9 @@ namespace DotNetCoreProject.Controllers
         }
 
         [Authorize, HttpGet]
-        public async Task<ActionResult<DataTableResponse>> GetUsers(string searchString)
+        public async Task<ActionResult<DataTableResponse>> GetUsers(string nameSearchString, string emailSearchString, string fromSearchString, string toSearchString)
         {
-            var users = _userService.GetAll(searchString);
+            var users = _userService.GetAll(nameSearchString, emailSearchString, fromSearchString, toSearchString);
 
             HttpContext.Session.SetComplexData("sessionUserList", users);
 

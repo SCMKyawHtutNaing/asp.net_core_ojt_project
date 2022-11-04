@@ -61,74 +61,81 @@
         <th>
             Address
         </th>
+        <th>
+            Operations
+        </th>
     </tr>
 </thead>
 </table>
 
 <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailsModalLabel">Post Detail</h5>
+                    <h5 class="modal-title" id="detailsModalLabel">User Detail</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                 </div>
-                <div class="modal-body">
+            <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <section>
                             <img id="detailProfile"/>
+                        </section>
+                    </div>
+                    <div class="col-md-8">
+                        <section>
                             <div class="row mb-3">
                                 <label asp-for="Name" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailName"></p>
+                                    <p class="detail-val-alt" id="detailName"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="Type" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailType"></p>
+                                    <p class="detail-val-alt" id="detailType"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="Email" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailEmail"></p>
+                                    <p class="detail-val-alt" id="detailEmail"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="DOB" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailDOB"></p>
+                                    <p class="detail-val-alt" id="detailDOB"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="Address" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailAddress"></p>
+                                    <p class="detail-val-alt" id="detailAddress"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="CreatedDate" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailCreatedDate"></p>
+                                    <p class="detail-val-alt" id="detailCreatedDate"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="CreatedUser" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailCreatedUser"></p>
+                                    <p class="detail-val-alt" id="detailCreatedUser"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="UpdatedDate" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailUpdatedDate"></p>
+                                    <p class="detail-val-alt" id="detailUpdatedDate"></p>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label asp-for="UpdatedUser" class="col-sm-4"></label>
                                 <div class="col-sm-8">
-                                    <p class="detail-val" id="detailUpdatedUser"></p>
+                                    <p class="detail-val-alt" id="detailUpdatedUser"></p>
                                 </div>
                             </div>
                         </section>
@@ -143,42 +150,66 @@
 </div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Post Delete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <section>
-@*                        <div class="row mb-3">
-                            <label asp-for="Title" class="col-sm-4"></label>
-                            <div class="col-sm-8">
-                                <p class="detail-val" id="deleteTitle"></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label asp-for="Description" class="col-sm-4"></label>
-                            <div class="col-sm-8">
-                                <p class="detail-val" id="deleteDescription"></p>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label asp-for="Status" class="col-sm-4"></label>
-                            <div class="col-sm-8">
-                                <p class="detail-val" id="deleteStatus"></p>
-                            </div>
-                        </div>*@
-                    </section>
-                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
-            <div class="modal-footer" id="deleteModalFooter">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a class="btn btn-danger">Delete</a>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <section>
+                            <div class="row mb-3">
+                                <label asp-for="Id" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteId"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Name" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteName"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Type" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteType"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Email" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteEmail"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Phone" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deletePhone"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="DOB" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteDOB"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Address" class="col-sm-4"></label>
+                                <div class="col-sm-8">
+                                    <p class="detail-val-alt" id="deleteAddress"></p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="modal-footer" id="deleteModalFooter">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a class="btn btn-danger">Delete</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
