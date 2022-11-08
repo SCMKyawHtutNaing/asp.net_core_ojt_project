@@ -66,8 +66,6 @@ namespace DotNetCoreProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
-
                     var fileExtension = Path.GetExtension(file.FileName);
 
                     if (fileExtension != ".png" && fileExtension != ".jpg" && fileExtension != ".jpeg")
@@ -109,7 +107,7 @@ namespace DotNetCoreProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var loggedinUser = await _userManager.GetUserAsync(User);
+                    var loggedInUser = await _userManager.GetUserAsync(User);
 
                     var user = new AspNetUser
                     {
@@ -118,7 +116,7 @@ namespace DotNetCoreProject.Controllers
                         Address = model.Address,
                         Role = 1,
                         CreatedDate = DateTime.Now,
-                        CreatedUserId = loggedinUser.Id,
+                        CreatedUserId = loggedInUser.Id,
                         Profile = model.ProfileBytes,
                     };
 

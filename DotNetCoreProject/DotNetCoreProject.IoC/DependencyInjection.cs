@@ -6,6 +6,7 @@ using DotNetCoreProject.Data;
 using DotNetCoreProject.Entity.DataContext;
 using DotNetCoreProject.Utilities.Utilities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +46,7 @@ namespace DotNetCoreProject.IoC
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailSender, MessageService>();
         }
     }
 }

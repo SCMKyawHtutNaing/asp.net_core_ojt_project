@@ -16,15 +16,15 @@ namespace DotNetCoreProject.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<ApplicationDBContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-/*                services.AddDefaultIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<ApplicationDBContext>();*/
-
-                services.AddIdentity<AspNetUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>();
+                services.AddIdentity<AspNetUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
             });
         }
     }

@@ -60,6 +60,14 @@
             "ClosedXML": {
               "target": "Package",
               "version": "[0.97.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.28.1, )"
             }
           },
           "imports": [
