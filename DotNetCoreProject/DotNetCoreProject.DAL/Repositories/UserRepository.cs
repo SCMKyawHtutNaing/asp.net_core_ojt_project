@@ -114,7 +114,7 @@ namespace DotNetCoreProject.DAL.Repositories
                                 Address = user.Address,
                                 Phone = user.PhoneNumber,
                                 DOB = user.DOB != null ? user.DOB.Value.ToString("yyyy/MM/dd") : "",
-                                Profile = user.Profile != null ? Convert.ToBase64String(user.Profile) : null
+                                ProfileString = user.Profile != null ? Convert.ToBase64String(user.Profile) : null
                             };
 
                 return query.FirstOrDefault();

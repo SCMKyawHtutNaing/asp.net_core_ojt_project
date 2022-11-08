@@ -1,6 +1,6 @@
 ﻿@model DotNetCoreProject.DTO.UserViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Register Confirm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,76 +14,77 @@
 
 <h2>@ViewData["Title"]</h2>
 <hr />
-<form asp-action="CreateConfirm" method="post" class="my-form needs-validation" novalidate enctype="multipart/form-data">
+<form asp-action="Create" method="post" class="my-form needs-validation" novalidate enctype="multipart/form-data">
     <div class="row justify-content-md-center">
         <div class="col-md-6">
             <section>
                 <div class="row mb-3">
                     <label asp-for="Name" class="col-sm-4 col-form-label required"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Name" class="form-control" aria-required="true" />
+                        <input asp-for="Name" class="form-control" aria-required="true" readonly/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Email" class="col-sm-4 col-form-label required"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Email" class="form-control" aria-required="true">
+                        <input asp-for="Email" class="form-control" aria-required="true" readonly>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Password" class="col-sm-4 col-form-label required"></label>
                     <div class="col-sm-8">
-                        <input type="password" asp-for="Password" class="form-control" aria-required="true">
+                        <input type="hidden" asp-for="Password" id="hiddenPassword">
+                        <input type="password" id="password" class="form-control" aria-required="true" value="********" readonly>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="ConfirmedPassword" class="col-sm-4 col-form-label required"></label>
                     <div class="col-sm-8">
-                        <input type="password" asp-for="ConfirmedPassword" class="form-control" aria-required="true">
+                        <input type="hidden" asp-for="ConfirmedPassword">
+                        <input type="password" class="form-control" aria-required="true" value="********" readonly>
                         <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Type" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Type" class="form-control" aria-required="true">
+                        <input asp-for="Type" class="form-control" aria-required="true" readonly>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Phone" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Phone" class="form-control">
+                        <input asp-for="Phone" class="form-control" readonly>
                         <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="DOB" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="DOB" class="form-control">
+                        <input asp-for="DOB" class="form-control" readonly>
                         <span asp-validation-for="DOB" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label asp-for="Address" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Address" class="form-control">
+                        <input asp-for="Address" class="form-control" readonly>
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label required">Profile</label>
                     <div class="col-sm-8">
-                        <input class="form-control" type="file" name="file" tabindex="14" accept=".png, .jpg, .jpeg" aria-required="true">
-                        <span class="text-danger"></span>
+                        <img alt="" src="@Model.ProfileString" width="100%" height="auto" />
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-8 offset-sm-4">
-                        <button type="submit" class="col-sm-3 btn btn-primary">Register</button>
+                        <button type="submit" class="col-sm-3 btn btn-primary">Confirm</button>
                         <button type="reset" class="col-sm-3 btn btn-secondary">Clear</button>
                     </div>
                 </div>
@@ -97,4 +98,11 @@
 @section scripts
 {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $('#hiddenPassword').blur(function (e) {
+
+            $('#password').val($(this).val());
+
+        });
+    </script>
 }

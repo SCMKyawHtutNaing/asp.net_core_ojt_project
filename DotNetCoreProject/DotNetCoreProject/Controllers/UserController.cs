@@ -60,18 +60,56 @@ namespace DotNetCoreProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserViewModel model, [FromForm] IFormFile file)
+        public ActionResult CreateConfirm(UserViewModel model, [FromForm] IFormFile file)
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    var loggedinUser = await _userManager.GetUserAsync(User);
+
+
+                    var fileExtension = Path.GetExtension(file.FileName);
+
+                    if (fileExtension != ".png" && fileExtension != ".jpg" && fileExtension != ".jpeg")
+                    {
+                        ViewData["errorMessage"] = "Please choose a valid image format.";
+
+                        return View("Create", model);
+                    }
 
                     byte[] imageData = null;
                     MemoryStream ms = new MemoryStream();
                     file.CopyTo(ms);
                     imageData = ms.ToArray();
+
+                    model.ProfileString = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+
+                    return View(model);
+
+                }
+                else {
+                    if (file == null)
+                    {
+                        ViewData["errorMessage"] = "Profile can't be blank.";
+                    }
+
+                    return View("Create", model);
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(UserViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var loggedinUser = await _userManager.GetUserAsync(User);
 
                     var user = new AspNetUser
                     {
@@ -81,7 +119,7 @@ namespace DotNetCoreProject.Controllers
                         Role = 1,
                         CreatedDate = DateTime.Now,
                         CreatedUserId = loggedinUser.Id,
-                        Profile = imageData
+                        Profile = model.ProfileBytes,
                     };
 
                     var result = await _userManager.CreateAsync(user, model.Password);
@@ -93,8 +131,9 @@ namespace DotNetCoreProject.Controllers
                         await _userManager.AddToRoleAsync(user, defaultrole.Name);
 
                         await _signInManager.SignInAsync(user, isPersistent: false);
-
-                        return RedirectToAction("index", "Home");
+                        
+                        TempData["successMessage"] = "User successfully created!";
+                        return RedirectToAction(nameof(Index));
                     }
 
                     foreach (var error in result.Errors)
