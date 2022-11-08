@@ -1,0 +1,76 @@
+﻿@model DotNetCoreProject.DTO.UserViewModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    <script type="text/javascript" src="~/js/user.js"></script>
+}
+
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        @TempData["successMessage"]
+    </div>
+}
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="row justify-content-md-center">
+    <div class="col-md-2">
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                @if (@Model.ProfileString != null)
+                {
+                    <img alt="" src="data:image/jpg;base64,@Model.ProfileString" width="100%" height="auto" />
+                }else{
+                    <img src="~/imgs/blank_profile.jpg" width="100%" height="auto" />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <section>
+            <div class="row mb-3">
+                <label asp-for="Name" class="col-sm-4 col-form-label required"></label>
+                <div class="col-sm-8">
+                    <p>@Model.Name</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Type" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <p>@Model.Type</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-sm-4 col-form-label required"></label>
+                <div class="col-sm-8">
+                    <p>@Model.Email</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Phone" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <p>@Model.Phone</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="DOB" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <p>@Model.DOB</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Address" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <p>@Model.Address</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <button type="submit" class="col-sm-2 btn btn-primary">Edit Profile</button>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.Data;
 using DotNetCoreProject.DTO;
 using DotNetCoreProject.Entity.DataContext;
@@ -19,14 +20,16 @@ namespace DotNetCoreProject.Controllers
 {
     public class AccountController : Controller
     {
+        private IUserService _userService;
         private readonly UserManager<AspNetUser> _userManager;
         private readonly SignInManager<AspNetUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailSender _emailSender;
         private readonly DBContext _dbContext;
 
-        public AccountController(UserManager<AspNetUser> userManager, SignInManager<AspNetUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, DBContext dbContext)
+        public AccountController(IUserService userService, UserManager<AspNetUser> userManager, SignInManager<AspNetUser> signInManager, RoleManager<IdentityRole> roleManager, IEmailSender emailSender, DBContext dbContext)
         {
+            _userService = userService;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -223,6 +226,16 @@ namespace DotNetCoreProject.Controllers
 
             TempData["successMessage"] = "Password successfully changed!";
             return RedirectToAction("Index", "User");
+        }
+
+        [Authorize, HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(User);
+
+            UserViewModel model = _userService.Get(loggedInUser.Id);
+
+            return View(model);
         }
     }
 }
