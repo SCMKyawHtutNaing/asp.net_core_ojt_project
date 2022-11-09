@@ -1,20 +1,10 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
-using DotNetCoreProject.BLL.Services.IServices;
-using DotNetCoreProject.Data;
+﻿using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DTO;
 using DotNetCoreProject.Entity.DataContext;
-using DotNetCoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DotNetCoreProject.Controllers
 {
@@ -69,7 +59,7 @@ namespace DotNetCoreProject.Controllers
                 if (result.Succeeded)
                 {
                     var defaultrole = _roleManager.FindByNameAsync("ADMIN").Result;
-                    
+
                     await _userManager.AddToRoleAsync(user, defaultrole.Name);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -200,7 +190,7 @@ namespace DotNetCoreProject.Controllers
         [Authorize, HttpGet]
         public ActionResult ChangePassword()
         {
-            return View();
+            return View(new ChangePasswordViewModel());
         }
 
         [Authorize, HttpPost]
@@ -236,6 +226,84 @@ namespace DotNetCoreProject.Controllers
             UserViewModel model = _userService.Get(loggedInUser.Id);
 
             return View(model);
+        }
+
+        [Authorize, HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            var loggedInUser = await _userManager.GetUserAsync(User);
+            UserViewModel model = _userService.Get(loggedInUser.Id);
+            ProfileViewModel viewModel = new ProfileViewModel();
+            viewModel.Id = model.Id;
+            viewModel.Name = model.Name;
+            viewModel.Email = model.Email;
+            viewModel.Type = model.Type;
+            viewModel.Address = model.Address;
+            viewModel.Phone = model.Phone;
+            viewModel.DOB = model.DOB;
+            viewModel.ProfileString = model.ProfileString;
+            return View(viewModel);
+        }
+
+        [Authorize, HttpPost]
+        public async Task<IActionResult> EditProfile(ProfileViewModel model, [FromForm] IFormFile? file)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await _userManager.FindByIdAsync(model.Id);
+
+                    if (file != null)
+                    {
+                        var fileExtension = Path.GetExtension(file.FileName);
+
+                        if (fileExtension != ".png" && fileExtension != ".jpg" && fileExtension != ".jpeg")
+                        {
+                            ViewData["errorMessage"] = "Please choose a valid image format.";
+
+                            return View(model);
+                        }
+
+                        byte[] imageData = null;
+                        MemoryStream ms = new MemoryStream();
+                        file.CopyTo(ms);
+                        imageData = ms.ToArray();
+
+                        user.Profile = imageData;
+                    }
+
+                    // Update it with the values from the view model
+                    user.UserName = model.Name;
+                    user.DOB = model.DOB == null ? user.DOB : Convert.ToDateTime(model.DOB).Date;
+                    user.Email = model.Email;
+                    user.PhoneNumber = model.Phone;
+                    user.Address = model.Address;
+
+                    var updateResult = await _userManager.UpdateAsync(user);
+
+                    if (!updateResult.Succeeded)
+                    {
+                        foreach (var error in updateResult.Errors)
+                        {
+                            ModelState.TryAddModelError(error.Code, error.Description);
+                        }
+                        return View(model);
+                    }
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    TempData["successMessage"] = "Profile successfully updated!";
+                    return RedirectToAction(nameof(Profile));
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch (Exception e)
+            {
+                ViewData["errorMessage"] = e.Message;
+                return View(model);
+            }
         }
     }
 }

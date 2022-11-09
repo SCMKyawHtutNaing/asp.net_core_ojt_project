@@ -8,13 +8,15 @@ namespace DotNetCoreProject.DTO
 {
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Password can't be blank.")]
         [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password Confirmation can't be blank.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Password and Password Confirmation are not match.")]
+        [Display(Name = "Password Confirmation")]
         public string ConfirmPassword { get; set; }
 
         public string Email { get; set; }
@@ -23,16 +25,20 @@ namespace DotNetCoreProject.DTO
 
     public class ChangePasswordViewModel
     {
+        [Required(ErrorMessage = "Current Password can't be blank.")]
         [DataType(DataType.Password)]
+        [Display(Name = "Current Password")]
         public string CurrentPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "New Password can't be blank.")]
         [DataType(DataType.Password)]
+        [Display(Name = "New Password")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "New Confirm Password can't be blank.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "New Password and New Confirmation Password is not match.")]
+        [Display(Name = "New Confirm Password")]
         public string ConfirmPassword { get; set; }
 
         public string? Id { get; set; }

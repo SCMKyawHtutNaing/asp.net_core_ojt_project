@@ -94,8 +94,9 @@ namespace DotNetCoreProject.Controllers
                     return View("Create", model);
                 }
             }
-            catch
+            catch (Exception e)
             {
+                ViewData["errorMessage"] = e.Message;
                 return View();
             }
         }
