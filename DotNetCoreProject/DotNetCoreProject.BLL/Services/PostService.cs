@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ClosedXML.Excel;
 using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DAL.IRepositories;
 using DotNetCoreProject.DTO;

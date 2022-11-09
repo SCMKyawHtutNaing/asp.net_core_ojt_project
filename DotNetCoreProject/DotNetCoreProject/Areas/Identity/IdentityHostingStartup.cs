@@ -1,13 +1,7 @@
-﻿using System;
-using DotNetCoreProject.Data;
+﻿using DotNetCoreProject.Data;
 using DotNetCoreProject.Entity.DataContext;
-using DotNetCoreProject.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(DotNetCoreProject.Areas.Identity.IdentityHostingStartup))]
 namespace DotNetCoreProject.Areas.Identity
@@ -22,7 +16,7 @@ namespace DotNetCoreProject.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddIdentity<AspNetUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDBContext>()
+            services.AddIdentity<AspNetUser, IdentityRole>(options => { options.SignIn.RequireConfirmedAccount = true; options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ "; }).AddEntityFrameworkStores<ApplicationDBContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
             });

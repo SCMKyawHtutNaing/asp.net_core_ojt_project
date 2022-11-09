@@ -49,7 +49,8 @@
                 <div class="row mb-3">
                     <label asp-for="Type" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="Type" class="form-control" aria-required="true">
+@*                        <input asp-for="Type" class="form-control" aria-required="true">*@
+                        <select asp-for="Type" class="form-control" asp-items="@ViewBag.roleList" aria-required="true"></select>
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
                 </div>
@@ -63,7 +64,7 @@
                 <div class="row mb-3">
                     <label asp-for="DOB" class="col-sm-4 col-form-label"></label>
                     <div class="col-sm-8">
-                        <input asp-for="DOB" class="form-control">
+                        <input asp-for="DOB" class="form-control" type="date">
                         <span asp-validation-for="DOB" class="text-danger"></span>
                     </div>
                 </div>

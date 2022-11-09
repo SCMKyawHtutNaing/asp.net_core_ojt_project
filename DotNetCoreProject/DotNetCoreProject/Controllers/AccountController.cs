@@ -44,6 +44,8 @@ namespace DotNetCoreProject.Controllers
 
             if (ModelState.IsValid)
             {
+                var loggedInUser = await _userManager.GetUserAsync(User);
+
                 var user = new AspNetUser
                 {
                     UserName = model.Email,
@@ -51,7 +53,7 @@ namespace DotNetCoreProject.Controllers
                     Address = "Tamwe",
                     Role = 1,
                     CreatedDate = DateTime.Now,
-                    CreatedUserId = "1"
+                    CreatedUserId = loggedInUser.Id
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -91,8 +93,6 @@ namespace DotNetCoreProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(loginUser.Email);
-
-                var pwd_is_valid = _userManager.CheckPasswordAsync(user, loginUser.Password);
 
                 var result = await _signInManager.PasswordSignInAsync(user, loginUser.Password, loginUser.RememberMe, false);
 
@@ -134,20 +134,15 @@ namespace DotNetCoreProject.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    ViewData["errorMessage"] = "Email does not exist.";
+                    return View(model);
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                // Send an email with this link
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { email = user.Email, token = token }, protocol: HttpContext.Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                "<h1>Welcome to Bulletin_Board, " + user.UserName + "</h1><br><p>Your username is: " + user.UserName + ".</p><br><a href='" + callbackUrl + "'>" + callbackUrl + "</a><br><p>Click the link and reset the password.</p><br><p>Thanks for joining and have a great day!</p>");
                 return View("ForgotPasswordConfirmation");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -166,15 +161,15 @@ namespace DotNetCoreProject.Controllers
                 return View(resetPasswordModel);
             var user = await _userManager.FindByEmailAsync(resetPasswordModel.Email);
             if (user == null)
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
-            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordModel.Token, resetPasswordModel.Password);
+                return View(resetPasswordModel);
+        var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordModel.Token, resetPasswordModel.Password);
             if (!resetPassResult.Succeeded)
             {
                 foreach (var error in resetPassResult.Errors)
                 {
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
-                return View();
+                return View(resetPasswordModel);
             }
             await _dbContext.Entry(user).ReloadAsync();
 
@@ -201,7 +196,19 @@ namespace DotNetCoreProject.Controllers
                 return View(resetPasswordModel);
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            {
+                ViewData["errorMessage"] = "User does not exist.";
+                return View(resetPasswordModel);
+            }
+
+            var pwd_is_valid = await _userManager.CheckPasswordAsync(user, resetPasswordModel.CurrentPassword);
+
+            if (!pwd_is_valid)
+            {
+                ViewData["errorMessage"] = "Current password is wrong!";
+                return View(resetPasswordModel);
+            }
+
             var changePassResult = await _userManager.ChangePasswordAsync(user, resetPasswordModel.CurrentPassword, resetPasswordModel.Password);
             if (!changePassResult.Succeeded)
             {

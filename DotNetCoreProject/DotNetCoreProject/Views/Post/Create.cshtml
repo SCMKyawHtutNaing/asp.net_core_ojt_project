@@ -12,6 +12,14 @@
     </div>
 }
 
+@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+        @TempData["errorMessage"]
+    </div>
+}
+
 <h2>@ViewData["Title"]</h2>
 <hr />
 <form asp-action="CreateConfirm" method="post" class="my-form needs-validation" novalidate>

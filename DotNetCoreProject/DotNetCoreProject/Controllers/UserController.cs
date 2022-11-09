@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocumentFormat.OpenXml.Wordprocessing;
 using DotNetCoreProject.BLL.Services;
 using DotNetCoreProject.BLL.Services.IServices;
 using DotNetCoreProject.DTO;
@@ -7,6 +8,7 @@ using DotNetCoreProject.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DotNetCoreProject.Controllers
 {
@@ -56,6 +58,15 @@ namespace DotNetCoreProject.Controllers
         [Authorize, HttpGet]
         public ActionResult Create()
         {
+            var roles = _roleManager.Roles.ToList();
+
+            List<SelectListItem> roleList = new List<SelectListItem>();
+
+            foreach (var role in roles)
+            {
+                roleList.Add(new SelectListItem { Value = role.Name, Text = role.Name });
+            }
+            ViewBag.roleList = roleList;
             return View();
         }
 
@@ -81,6 +92,7 @@ namespace DotNetCoreProject.Controllers
                     imageData = ms.ToArray();
 
                     model.ProfileString = "data:image/jpg;base64," + Convert.ToBase64String(imageData);
+                    model.ProfileBytes = imageData;
 
                     return View(model);
 
@@ -88,7 +100,7 @@ namespace DotNetCoreProject.Controllers
                 else {
                     if (file == null)
                     {
-                        ViewData["errorMessage"] = "Profile can't be blank.";
+                        TempData["errorMessage"] = "Profile can't be blank.";
                     }
 
                     return View("Create", model);
@@ -96,8 +108,8 @@ namespace DotNetCoreProject.Controllers
             }
             catch (Exception e)
             {
-                ViewData["errorMessage"] = e.Message;
-                return View();
+                TempData["errorMessage"] = e.Message;
+                return View("Create", model);
             }
         }
 
@@ -112,10 +124,11 @@ namespace DotNetCoreProject.Controllers
 
                     var user = new AspNetUser
                     {
-                        UserName = model.Email,
+                        UserName = model.Name,
                         Email = model.Email,
                         Address = model.Address,
-                        Role = 1,
+                        DOB = model.DOB == null ? null : Convert.ToDateTime(model.DOB).Date,
+                        Role = model.Type == "ADMIN" ? 1 : 0,
                         CreatedDate = DateTime.Now,
                         CreatedUserId = loggedInUser.Id,
                         Profile = model.ProfileBytes,
@@ -125,11 +138,13 @@ namespace DotNetCoreProject.Controllers
 
                     if (result.Succeeded)
                     {
-                        var defaultrole = _roleManager.FindByNameAsync("ADMIN").Result;
+                        var role = _roleManager.FindByNameAsync(model.Type).Result;
 
-                        await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                        if (role != null) {
+                            await _userManager.AddToRoleAsync(user, role.Name);
+                        }
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+/*                        await _signInManager.SignInAsync(user, isPersistent: false);*/
                         
                         TempData["successMessage"] = "User successfully created!";
                         return RedirectToAction(nameof(Index));
