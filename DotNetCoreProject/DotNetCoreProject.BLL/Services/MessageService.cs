@@ -11,35 +11,35 @@ using System.Threading.Tasks;
 
 namespace DotNetCoreProject.BLL.Services
 {
-    public class MessageService : IEmailSender
-    {
-        public static string sendGridKey = "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";
+	public class MessageService : IEmailSender
+	{
+		string sendGridKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
 
-        public async Task SendEmailAsync(string toEmail, string subject, string message)
-        {
-            if (string.IsNullOrEmpty(sendGridKey))
-            {
-                throw new Exception("Null SendGridKey");
-            }
-            await Execute(sendGridKey, subject, message, toEmail);
-        }
+		public async Task SendEmailAsync(string toEmail, string subject, string message)
+		{
+			if (string.IsNullOrEmpty(sendGridKey))
+			{
+				throw new Exception("Null SendGridKey");
+			}
+			await Execute(sendGridKey, subject, message, toEmail);
+		}
 
-        public async Task Execute(string apiKey, string subject, string message, string toEmail)
-        {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("scm.kyawhtutnaing@gmail.com", "Password Recovery"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(toEmail));
+		public async Task Execute(string apiKey, string subject, string message, string toEmail)
+		{
+			var client = new SendGridClient(apiKey);
+			var msg = new SendGridMessage()
+			{
+				From = new EmailAddress("scm.kyawhtutnaing@gmail.com", "Password Recovery"),
+				Subject = subject,
+				PlainTextContent = message,
+				HtmlContent = message
+			};
+			msg.AddTo(new EmailAddress(toEmail));
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
-            var response = await client.SendEmailAsync(msg);
-        }
-    }
+			// Disable click tracking.
+			// See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+			msg.SetClickTracking(false, false);
+			var response = await client.SendEmailAsync(msg);
+		}
+	}
 }
